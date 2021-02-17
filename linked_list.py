@@ -17,6 +17,13 @@ class LinkedList:
         self.head = temp_node
         return self.head
 
+    def delete_at_head(self):
+        first_element = self.get_head()
+
+        if first_element is not None:
+            self.head = first_element.next_element
+            first_element.next_element = None
+
     def is_empty(self):
         if self.head is None:
             return True
