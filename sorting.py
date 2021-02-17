@@ -59,4 +59,36 @@ def partition(array, low, high):
     return leftwall
 
 
+def mergsort(array):
+    if n == 1:
+        return array
+    arrayOne = array[1 : (n / 2)]
+    arrayTwo = array[(n / 2) + 1 : array[n]]
+    arrayOne = mergesort(arrayOne)
+    arrayTwo = mergesort(arrayTwo)
+
+    return merge(arrayOne, arrayTwo)
+
+
+def merge(a, b):
+    c = []
+    while a and b:
+        if a[0] > b[0]:
+            c.append(b[0])
+            del b[0]
+        else:
+            c.append(a[0])
+            del a[0]
+
+    while a:
+        c.append(a[0])
+        del a[0]
+
+    while b:
+        c.append(b[0])
+        del b[0]
+
+    return c
+
+
 print(quicksort(array, 2, 8))
