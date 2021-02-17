@@ -37,4 +37,26 @@ def bubble_sort(array):
     return array
 
 
-print(bubble_sort(array))
+def quicksort(array, low, high):
+    if low < high:
+        pivot_location = partition(array, low, high)
+        quicksort(array, low, pivot_location)
+        quicksort(array, pivot_location + 1, high)
+
+    return array
+
+
+def partition(array, low, high):
+    pivot = array[low]
+    leftwall = low
+
+    for i in range(low + 1, high):
+        if array[i] < pivot:
+            array[i], array[leftwall] = array[leftwall], array[i]
+            leftwall = leftwall + 1
+
+    array[leftwall], pivot = pivot, array[leftwall]
+    return leftwall
+
+
+print(quicksort(array, 2, 8))
