@@ -11,7 +11,11 @@ class Graph:
 
     def add_edge(self, source, destination):
         if source < self.vertices and destination < self.vertices:
+            # Directed Implementation
             self.array[source].insert_at_head(destination)
+
+            # Undirected Implementation
+            # self.array[destination].insert_at_head(source)
 
     def print_graph(self):
         print(">> Adjacency List of Directed Graph <<")
