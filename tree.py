@@ -26,6 +26,45 @@ class Node:
         if self.right:
             self.right.PrintTree()
 
+    def delete(self, val):
+    if val < self.val:  # val is in the left subtree
+        if(self.leftChild):
+            self.leftChild = self.leftChild.delete(val)
+        else:
+            print(str(val) + " not found in the tree")
+            return None
+    elif val > self.val:  # val is in the right subtree
+        if(self.rightChild):
+            self.rightChild = self.rightChild.delete(val)
+        else:
+            print(str(val) + " not found in the tree")
+            return None
+    else:  # val was found
+        # deleting node with no children
+        if self.leftChild is None and self.rightChild is None:
+            self = None
+            return None
+        # deleting node with right child
+        elif self.leftChild is None:
+            tmp = self.rightChild
+            self = None
+            return tmp
+        # deleting node with right child
+        elif self.leftChild is None:
+            tmp = self.rightChild
+            self = None
+            return tmp
+        # deleting a node with two children
+        else:
+            # first get the inorder successor
+            current = self.rightChild
+            # loop down to find the leftmost leaf
+            while(current.leftChild is not None):
+                current = current.leftChild
+            self.val = current.val
+            self.rightChild = self.rightChild.delete(current.val)
+
+    return self
 
 def minDepth(root):
     if root == None:
