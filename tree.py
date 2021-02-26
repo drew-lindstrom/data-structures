@@ -3,6 +3,12 @@ class Node:
         self.left = None
         self.right = None
         self.data = data
+        self.parent = None
+
+class BinarySearchTree:
+    def __init__(self):
+        self.root = Node(data)
+
 
     def insert(self, data):
         if self.data:
@@ -119,7 +125,7 @@ def _display_aux(node):
     lines = [first_line, second_line] + \
         [a + u * ' ' + b for a, b in zipped_lines]
     return lines, n + m + u, max(p, q) + 2, n + u // 2
-    
+
 def minDepth(root):
     if root == None:
         return True
