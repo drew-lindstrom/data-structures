@@ -19,7 +19,24 @@ class Trie:
         return ord(t) - ord("a")
 
     def insert(self, key):
-        pass
+        if key is None:
+            return
+
+        key = key.lower()
+        current_node = self.root
+        index = 0
+
+        for level in range(len(key)):
+            index = self.get_index(key[level])
+
+            if current_node.children[index] is None:
+                current_node.children[index] = TrieNode(key[level])
+                print(key[level] + "inserted")
+
+            current_node = current_node.children[index]
+
+        current_node.mark_as_leaf()
+        print("'" + key + "' inserted")
 
     def search(self, key):
         pass
