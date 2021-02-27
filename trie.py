@@ -53,5 +53,51 @@ class Trie:
 
         return False
 
+    def has_no_children(self, current_node):
+        for i in range(len(current_node.children)):
+            if current_node.children[i] is not None:
+                return False
+        return True
+
+    def delete_helper(self, key, current_node, length, level):
+        deleted_self = False
+
+        if current_node is None:
+            print("Key does not exist")
+            return deleted_self
+
+        if level is length:
+            if self.has_no_children(current_node):
+                current_node = None
+                deleted_self = True
+
+            else:
+                current_node.unMarkAsLeaf()
+                deleted_self = False
+
+        else:
+            child_node = current_node.children[self.get_index(key[level])]
+            child_deleted = self.delete_helper(key, child_node, length, level + 1)
+            if child_deleted:
+                current_node.children[self.get_index(key[level])] = None
+                if current_node.is_end_word:
+                    deleted_self = False
+
+                elif self.has_no_children(current_node) is False:
+                    deleted_self = False
+
+                else:
+                    current_node = None
+                    deleted_self = True
+
+            else:
+                deleted_self = False
+
+        return deleted_self
+
     def delete(self, key):
-        pass
+        if self.root is None or key is None:
+            print("None key or empty trie error")
+            return
+
+        self.delete_helper(key, self.root, len(key), 0)
