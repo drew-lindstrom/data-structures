@@ -39,7 +39,19 @@ class Trie:
         print("'" + key + "' inserted")
 
     def search(self, key):
-        pass
+        if key is None:
+            return False
+
+        for level in range(len(key)):
+            index = self.get_index(key[level])
+            if current_node.children[index] is None:
+                return False
+            current_node = current_node.children[index]
+
+        if current_node is not None and current_node.is_end_word:
+            return True
+
+        return False
 
     def delete(self, key):
         pass
