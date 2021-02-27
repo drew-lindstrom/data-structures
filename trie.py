@@ -9,3 +9,20 @@ class TrieNode:
 
     def unmark_as_leaf(self):
         self.is_end_word = False
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def get_index(self, t):
+        return ord(t) - ord("a")
+
+    def insert(self, key):
+        pass
+
+    def search(self, key):
+        pass
+
+    def delete(self, key):
+        pass
