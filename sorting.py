@@ -106,4 +106,43 @@ def find_sum(lst, n):
             return [lst[i], dictionary[lst[i]]]
 
 
-print(find_sum([1, 21, 3, 14, 5, 60, 7, 6], 81))
+def pivoted_binary_search(lst, n, key):
+
+    counter = 0
+    low = 0
+    high = len(lst) - 1
+    mid = 0
+    temp = 0
+
+    for i in range(len(lst) - 1):
+        if lst[i] > lst[i + 1]:
+            counter += 1
+            break
+        else:
+            counter += 1
+
+    temp = counter
+
+    while temp > 0:
+        lst.append(lst[0])
+        lst.pop(0)
+        temp -= 1
+
+    while low <= high:
+        mid = (high + low) // 2
+
+        if lst[mid] < key:
+            low = mid + 1
+
+        elif lst[mid] > key:
+            high = mid - 1
+
+        else:
+            break
+
+    print(low)
+    print(counter)
+    return high + counter - 1
+
+
+print(pivoted_binary_search([7, 8, 9, 0, 3, 5, 6], 0, 3))
