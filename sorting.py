@@ -92,3 +92,18 @@ def merge(a, b):
 
 
 print(quicksort(array, 2, 8))
+
+
+def find_sum(lst, n):
+    dictionary = {}
+    lst.sort()
+
+    for i in range(len(lst)):
+        dictionary[lst[i]] = n - lst[i]
+
+    for i in range(len(lst)):
+        if dictionary[lst[i]] in lst:
+            return [lst[i], dictionary[lst[i]]]
+
+
+print(find_sum([1, 21, 3, 14, 5, 60, 7, 6], 81))
