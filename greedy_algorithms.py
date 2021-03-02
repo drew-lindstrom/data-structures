@@ -1,3 +1,6 @@
+import math
+
+
 def find_largest_number(number_of_digits, sum_of_digits):
 
     answer = []
@@ -20,4 +23,19 @@ def find_largest_number(number_of_digits, sum_of_digits):
     return answer
 
 
-print(find_largest_number(2, 9))
+def egyptian_fraction(numerator, denominator):
+    lst_denominator = []
+
+    while numerator != 0:
+        x = math.ceil(denominator / numerator)
+
+        lst_denominator.append(x)
+
+        numerator = x * numerator - denominator
+        denominator = denominator * x
+
+    return lst_denominator
+
+
+# print(find_largest_number(2, 9))
+print(egyptian_fraction(2, 3))
