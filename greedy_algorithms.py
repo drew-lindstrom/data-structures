@@ -37,5 +37,33 @@ def egyptian_fraction(numerator, denominator):
     return lst_denominator
 
 
+def find_platform(arrival, departure):
+
+    n = len(arrival)
+    arrival.sort()
+    departure.sort()
+
+    plat_needed = 1
+    result = 1
+    i = 1
+    j = 0
+
+    while i < n and j < n:
+
+        if arrival[i] < departure[j]:
+
+            plat_needed += 1
+            i += 1
+
+            if plat_needed > result:
+                result = plat_needed
+
+        else:
+            plat_needed -= 1
+            j += 1
+
+    return result
+
+
 # print(find_largest_number(2, 9))
 print(egyptian_fraction(2, 3))
