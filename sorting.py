@@ -177,4 +177,30 @@ def sort_binary_list(lst):
     return lst
 
 
+def search_insert_position(lst, value):
+    size = len(lst)
+
+    if size < 1:
+        return -1
+
+    start = 0
+    end = size - 1
+
+    pos = 0
+
+    while start <= end:
+        mid = start + (end - start) // 2
+
+        if lst[mid] == value:
+            return mid
+        elif lst[mid] > value:
+            end = mid - 1
+            pos = mid
+        else:
+            start = mid + 1
+            pos = mid + 1
+
+    return pos
+
+
 print(pivoted_binary_search([7, 8, 9, 0, 3, 5, 6], 0, 3))
