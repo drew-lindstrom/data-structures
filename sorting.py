@@ -166,4 +166,15 @@ def anagrams(lst):
     return result
 
 
+def sort_binary_list(lst):
+    size = len(lst)
+
+    for i in range(size):
+        for j in range(0, size - i - 1):
+            if lst[j] > lst[j + 1]:
+                lst[j], lst[j + 1] = lst[j + 1], lst[j]
+
+    return lst
+
+
 print(pivoted_binary_search([7, 8, 9, 0, 3, 5, 6], 0, 3))
