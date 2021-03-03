@@ -145,4 +145,25 @@ def pivoted_binary_search(lst, n, key):
     return high + counter - 1
 
 
+def anagrams(lst):
+    dictionary = {}
+
+    for string in lst:
+        key = "".join(sorted(string))
+        if key in dictionary.keys():
+            dictionary[key].append(string)
+        else:
+            dictionary[key] = []
+            dictionary[key].append(string)
+
+    result = []
+    for key, value in dictionary.items():
+        if len(value) >= 2:
+            result.append(value)
+
+    result = sorted(result)
+
+    return result
+
+
 print(pivoted_binary_search([7, 8, 9, 0, 3, 5, 6], 0, 3))
