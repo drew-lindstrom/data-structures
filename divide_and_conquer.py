@@ -21,3 +21,20 @@ def find_peak(lst):
         return lst[len(lst) - 1]
 
     return -1
+
+
+def minimum_steps(lst):
+    minimum = None
+    min_count = 0
+
+    for num in lst:
+        if minimum == None:
+            minimum = num
+        else:
+            minimum = min(num, minimum)
+
+    for num in lst:
+        if num == minimum:
+            min_count += 1
+
+    return minimum + len(lst) - min_count
