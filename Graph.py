@@ -64,6 +64,35 @@ def transpose(my_graph):
     return new_graph
 
 
+def find_all_paths_recursive(graph, source, destination, visited, path, paths):
+    visited[source] = True
+    path.append(source)
+
+    if source == destination:
+        paths.append((path))
+    else:
+        while graph.graph[source] is not None:
+            i = graph.graph[source].vertex
+
+            if not visited[i]:
+                find_all_paths_recursive(graph, i, destination, visited, path, paths)
+
+            graph.graph[source] = graph.graph[source].next
+
+    path.pop()
+    visited[source] = False
+
+
+def find_all_paths(graph, source, destination):
+    visited = [False] * (graph.V)
+
+    paths = []
+    path = []
+
+    find_all_paths_recursive(graph, source, destination, visited, path, paths)
+    return paths
+
+
 graph = Graph(8)
 graph.add_edge(1, 4)
 graph.add_edge(1, 5)
