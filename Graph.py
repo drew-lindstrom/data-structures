@@ -29,7 +29,22 @@ class Graph:
             print("None")
 
 
+def transpose(my_graph):
+    new_graph = Graph(my_graph.V)
+
+    for source in range(my_graph.V):
+
+        while my_graph.graph[source] is not None:
+
+            destination = my_graph.graph[source].vertex
+            new_graph.add_edge(destination, source)
+            my_graph.graph[source] = my_graph.graph[source].next
+
+    return new_graph
+
+
 graph = Graph(8)
 graph.add_edge(1, 4)
+graph.add_edge(1, 5)
 graph.add_edge(4, 6)
 graph.print_graph()
