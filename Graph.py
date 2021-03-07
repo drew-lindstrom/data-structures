@@ -29,6 +29,27 @@ class Graph:
             print("None")
 
 
+def DFS(my_graph, source):
+    visited = [False] * (len(my_graph.graph))
+    stack = []
+    result = ""
+
+    stack.append(source)
+
+    while stack:
+        source = stack.pop()
+
+        if not visited[source]:
+            result += str(source)
+            visited[source] = True
+
+        while my_graph.graph[source] is not None:
+            data = my_graph.graph[source].vertex
+            if not visited[data]:
+                stack.append(data)
+            my_graph.graph[source] = my_graph.graph[source].next
+
+
 def transpose(my_graph):
     new_graph = Graph(my_graph.V)
 
