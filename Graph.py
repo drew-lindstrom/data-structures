@@ -93,6 +93,38 @@ def find_all_paths(graph, source, destination):
     return paths
 
 
+def remove_edge(graph, source, destination):
+
+    if graph.V == 0:
+        return graph
+
+    if source >= graph.V or source < 0:
+        return graph
+
+    if destination >= graph.V or destination < 0:
+        return graph
+
+    temp = graph.graph[source]
+
+    if temp is not None:
+        if temp.vertex == destination:
+            graph.graph[source] = temp.next
+            temp = None
+            return
+
+    while temp is not None:
+        if destination == temp.vertex:
+            break
+        prev = temp
+        temp = temp.next
+
+    if temp is None:
+        return
+
+    prev.next = temp.next
+    temp = None
+
+
 graph = Graph(8)
 graph.add_edge(1, 4)
 graph.add_edge(1, 5)
