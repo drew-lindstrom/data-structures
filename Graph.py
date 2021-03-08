@@ -125,6 +125,38 @@ def remove_edge(graph, source, destination):
     temp = None
 
 
+def detect_cycle(graph):
+    visited = [False] * graph.V
+
+    my_stack = [False] * graph.V
+
+    for node in range(graph.V):
+        if detect_cycle_recursive(graph, node, visited, my_stack):
+            return True
+
+    return False
+
+
+def detect_cycle_recursive(graph, node, visited, my_stack):
+    if my_stack[node]:
+        return True
+
+    if visited[node]:
+        return False
+    visited[node] = True
+    my_stack[node] = True
+
+    head = graph.graph[node]
+    while head is not None:
+        adjacent = head.vertex
+        if detect_cycle_recursive(graph, adjacent, visited, my_stack):
+            return True
+        head = head.next
+
+    my_stack[node] = False
+    return False
+
+
 graph = Graph(8)
 graph.add_edge(1, 4)
 graph.add_edge(1, 5)
