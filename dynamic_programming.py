@@ -29,4 +29,22 @@ def find_min_fee_recursive(fee, step):
     return _min + fee[step]
 
 
+def find_min_fee_dynamic(fee):
+    dp = [-1] * len(fee)
+    return find_min_fee_recursive(fee, 0, dp)
+
+
+def find_min_fee_dynamic_util(fee, step, dp):
+    if step > len(fee) - 1:
+        return 0
+
+    take_1_step = find_min_fee_dynamic_util(fee, step + 1, dp)
+    take_2_step = find_min_fee_dynamic_util(fee, step + 2, dp)
+    take_3_step = find_min_fee_dynamic_util(fee, step + 3, dp)
+
+    dp[step] = fee[step] + min(take_1_step, take_2_step, take_3_step)
+
+    return dp[step]
+
+
 print(find_min_fee([1, 2, 5, 2]))
