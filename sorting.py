@@ -94,6 +94,16 @@ def merge(a, b):
 print(quicksort(array, 2, 8))
 
 
+def cylic_sort(lst):
+    i = 0
+    while i < len(nums):
+        j = nums[i] - 1
+        if nums[i] != nums[j]:
+            nums[i], nums[j] = nums[j], nums[i]
+        else:
+            i += 1
+
+
 def find_sum(lst, n):
     dictionary = {}
     lst.sort()
