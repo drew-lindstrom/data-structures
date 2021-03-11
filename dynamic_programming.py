@@ -47,4 +47,36 @@ def find_min_fee_dynamic_util(fee, step, dp):
     return dp[step]
 
 
-print(find_min_fee([1, 2, 5, 2]))
+def find_min_fee_tabulation(fee):
+    n = len(fee)
+    dp = [0 for x in range(n + 1)]
+    dp[0] = 0
+    dp[1] = fee[0]
+    dp[2] = fee[0]
+
+    for i in range(2, n):
+        dp[i + 1] = min(fee[i] + dp[i], fee[i - 1] + dp[i - 1], fee[i - 2] + dp[i - 2])
+
+    return dp[n]
+
+
+def find_lps_length(string):
+    return find_lps_length_recursive(string, 0, len(string) - 1)
+
+
+def find_lps_length_recursive(string, pointer1, pointer2):
+
+    if pointer1 > pointer2:
+        return 0
+
+    if pointer1 == pointer2:
+        return 1
+    if string[pointer1] == string[pointer2]:
+        return 2 + find_lps_length_recursive(string, pointer1 + 1, pointer2 - 1)
+
+    c1 = find_lps_length_recursive(string, pointer1 + 1, pointer2)
+    c2 = find_lps_length_recursive(string, pointer1, pointer2 - 1)
+    return max(c1, c2)
+
+
+print(find_lps_length("abdbca"))
