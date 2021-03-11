@@ -61,7 +61,9 @@ def find_min_fee_tabulation(fee):
 
 
 def find_lps_length(string):
-    return find_lps_length_recursive(string, 0, len(string) - 1)
+    n = len(string)
+    dp = [[-1 for _ in range(n)] for _ in range(n)]
+    return find_lps_length_dynamic(string, 0, len(string) - 1, dp)
 
 
 def find_lps_length_recursive(string, pointer1, pointer2):
@@ -71,12 +73,34 @@ def find_lps_length_recursive(string, pointer1, pointer2):
 
     if pointer1 == pointer2:
         return 1
+
     if string[pointer1] == string[pointer2]:
         return 2 + find_lps_length_recursive(string, pointer1 + 1, pointer2 - 1)
 
     c1 = find_lps_length_recursive(string, pointer1 + 1, pointer2)
     c2 = find_lps_length_recursive(string, pointer1, pointer2 - 1)
     return max(c1, c2)
+
+
+def find_lps_length_dynamic(string, pointer1, pointer2, dp):
+
+    if pointer1 > pointer2:
+        return 0
+
+    if pointer1 == pointer2:
+        return 1
+
+    if dp[pointer1][pointer2] == -1:
+        if string[pointer1] == string[pointer2]:
+            dp[pointer1][pointer2] = 2 + find_lps_length_recursive(
+                string, pointer1 + 1, pointer2 - 1
+            )
+        else:
+            c1 = find_lps_length_recursive(string, pointer1 + 1, pointer2)
+            c2 = find_lps_length_recursive(string, pointer1, pointer2 - 1)
+            dp[pointer1][pointer2] = max(c1, c2)
+
+    return dp[pointer1][pointer2]
 
 
 print(find_lps_length("abdbca"))
