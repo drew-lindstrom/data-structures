@@ -53,6 +53,9 @@ class Spot:
     def make_closed(self):
         self.color = RED
 
+    def make_open(self):
+        self.color = GREEN
+
     def make_barrier(self):
         self.color = BLACK
 
@@ -98,6 +101,13 @@ def h(p1, p2):
     return abs(x1 - x2) + abs(y1 - y2)
 
 
+def reconstruct_path(came_from, current, draw):
+    while current in came_from:
+        current = came_from[current]
+        current.make_path()
+        draw()
+
+
 def algorithm(draw, grid, start, end):
     count = 0
     open_set = PriorityQueue()
@@ -119,7 +129,8 @@ def algorithm(draw, grid, start, end):
         open_set_hash.remove(current)
 
         if current == end:
-            # pass
+            reconstruct_path(came_from, end, draw)
+            end.make_end()
             return True
 
         for neighbor in current.neighbors:
